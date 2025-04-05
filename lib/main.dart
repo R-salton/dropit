@@ -1,5 +1,7 @@
 import 'package:dropit/core/theme.dart';
+import 'package:dropit/message_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 void main() {
   runApp(const MainApp());
@@ -13,12 +15,16 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: AppTheme.darkTheme,
-      home: const Scaffold(
+      home: ScreenUtilInit(
+        designSize: const Size(375, 812),
+        minTextAdapt: true,
+         splitScreenMode: true,
+         builder: (context, child) => const Scaffold(
+          body: Center(
+            child: MessagePage(),
+          ),
         
-        body: Center(
-          child: Text('Hello World!'),
-        ),
-      ),
+         ),)
     );
   }
 }

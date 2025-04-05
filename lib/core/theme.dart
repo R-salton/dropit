@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 
 class FontSizes{
-  static const small = 12.0;
+  static const small = 12;
   static const standard = 14.0;
   static const standartUp = 16.0;
   static const medium = 20.0;
