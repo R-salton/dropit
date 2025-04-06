@@ -7,44 +7,49 @@ class ChatPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Row(
-          children: [
-            CircleAvatar(
-              backgroundImage: NetworkImage(
-                'https://picsum.photos/200',
+    return GestureDetector(
+      onTap: () {
+        FocusScope.of(context).unfocus();
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: Row(
+            children: [
+              CircleAvatar(
+                backgroundImage: NetworkImage(
+                  'https://picsum.photos/200',
+                ),
+                radius: 20,
               ),
-              radius: 20,
-            ),
-            const SizedBox(width: 10),
-            Text('Sadev',style: Theme.of(context).textTheme.titleMedium),
+              const SizedBox(width: 10),
+              Text('Sadev',style: Theme.of(context).textTheme.titleMedium),
+            ],
+          ),
+          centerTitle: true,
+          backgroundColor: Colors.transparent,
+          actions: [
+            IconButton(icon: const Icon(Icons.search,color: Colors.white,), onPressed: () {}),
           ],
         ),
-        centerTitle: true,
-        backgroundColor: Colors.transparent,
-        actions: [
-          IconButton(icon: const Icon(Icons.search,color: Colors.white,), onPressed: () {}),
-        ],
-      ),
-      body: Column(
-        children: [
-          Expanded(child: ListView(
-            padding: EdgeInsets.all(20.w),
-            children: [
-              _buildReceivedMessage(context,"Hi, how are you?"),
-              _buildSentMessage(context,"I am fine, thank you!"),
-              _buildReceivedMessage(context,"So what are you doing?"),
-              _buildSentMessage(context,"I am just coding"),
-              _buildReceivedMessage(context,"Seriously?, because you are a programmer?"),
-              _buildSentMessage(context,"Yes, I am"),
-              _buildReceivedMessage(context,"What do you do?"),
-              _buildSentMessage(context,"I am coding"),
-              _buildReceivedMessage(context,"Okay"),
-            ]
-          ),),
-          _buildMessageInput(context,"Message..."),
-        ],
+        body: Column(
+          children: [
+            Expanded(child: ListView(
+              padding: EdgeInsets.all(20.w),
+              children: [
+                _buildReceivedMessage(context,"Hi, how are you?"),
+                _buildSentMessage(context,"I am fine, thank you!"),
+                _buildReceivedMessage(context,"So what are you doing?"),
+                _buildSentMessage(context,"I am just coding"),
+                _buildReceivedMessage(context,"Seriously?, because you are a programmer?"),
+                _buildSentMessage(context,"Yes, I am"),
+                _buildReceivedMessage(context,"What do you do?"),
+                _buildSentMessage(context,"I am coding"),
+                _buildReceivedMessage(context,"Okay"),
+              ]
+            ),),
+            _buildMessageInput(context,"Message..."),
+          ],
+        ),
       ),
     );
   }

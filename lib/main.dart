@@ -1,4 +1,4 @@
-import 'package:dropit/core/chat_page.dart';
+import 'package:dropit/chat_page.dart';
 import 'package:dropit/core/theme.dart';
 import 'package:dropit/message_page.dart';
 import 'package:flutter/material.dart';
