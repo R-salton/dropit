@@ -1,3 +1,4 @@
+import 'package:dropit/core/chat_page.dart';
 import 'package:dropit/core/theme.dart';
 import 'package:dropit/message_page.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +22,7 @@ class MainApp extends StatelessWidget {
          splitScreenMode: true,
          builder: (context, child) => const Scaffold(
           body: Center(
-            child: MessagePage(),
+            child: ChatPage(),
           ),
         
          ),)
