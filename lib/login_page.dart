@@ -1,28 +1,27 @@
 import 'package:dropit/core/theme.dart';
+import 'package:dropit/register_page.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import 'login_page.dart';
-
-class RegisterPage extends StatefulWidget {
-  const RegisterPage({super.key});
+class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
 
   @override
-  State<RegisterPage> createState() => _RegisterPageState();
+  State<LoginPage> createState() => _LoginPageState();
 }
 
-class _RegisterPageState extends State<RegisterPage> {
-   final _usernameControl = TextEditingController();
+class _LoginPageState extends State<LoginPage> {
+
     final _passwordControl = TextEditingController();
     final _emailControl = TextEditingController();
 
 void _onSubmitted() {
-  String username = _usernameControl.text;
+
   String email = _emailControl.text;
   String password = _passwordControl.text;
   // Perform registration logic here
-  print('Username: $username');
+
   print('Email: $email');
   print('Password: $password');
   // Clear the text fields after submission
@@ -32,7 +31,6 @@ void _onSubmitted() {
 
 @override
   void dispose() {
-    _usernameControl.dispose();
     _passwordControl.dispose();
     _emailControl.dispose();
     super.dispose();
@@ -56,11 +54,10 @@ void _onSubmitted() {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-            _buildTexInput(context,"Username",Icons.person,_usernameControl),
             _buildTexInput(context,"Email",Icons.email,_emailControl),
             _buildTexInput(context,"Password",Icons.lock,_passwordControl,isPassowrd: true),
-            _buildRegisterButton(context),
-           _buildLoginPrompt()
+            _buildLoginButton(context),
+           _buildRegisterPrompt()
           ],),
           )
         )
@@ -70,7 +67,7 @@ void _onSubmitted() {
 
 
 // Register Button
-   Widget _buildRegisterButton(BuildContext context){
+   Widget _buildLoginButton(BuildContext context){
 
     return ElevatedButton(
       onPressed: _onSubmitted,
@@ -85,7 +82,7 @@ void _onSubmitted() {
       ),
       
       child: Text(
-        "Register",
+        "Login",
         style: TextStyle(
           color: Colors.white,
       ),
@@ -126,38 +123,38 @@ void _onSubmitted() {
 
  
 // Login Prompt
-Widget _buildLoginPrompt(){
+Widget _buildRegisterPrompt(){
 
   return Center(
     child: RichText(
       text: TextSpan(
-        text: "Already have an account? ",
+        text: "Don't have an account? ",
         style: TextStyle(color: Colors.grey),
         children: [
           TextSpan(
-            text: "Click here to login",
+            text: "Click here to register",
             style: TextStyle(color: Colors.blue),
             recognizer: TapGestureRecognizer()..onTap = () {
               // Handle login action
               Navigator.push(
-                  context,
-                  PageRouteBuilder(
-                    transitionDuration: Duration(milliseconds: 500),
-                    pageBuilder: (_, __, ___) => const LoginPage(),
-                    transitionsBuilder: (_, animation, __, child) {
-                      return SlideTransition(
-                        position: Tween<Offset>(
-                          begin: const Offset(-1, 0), // from right
-                          end: Offset.zero,
-                        ).animate(CurvedAnimation(
-                          parent: animation,
-                          curve: Curves.easeOut,
-                        )),
-                        child: child,
-                      );
-                    },
-                  ),
+            context,
+            PageRouteBuilder(
+              transitionDuration: Duration(milliseconds: 500),
+              pageBuilder: (_, __, ___) => const RegisterPage(),
+              transitionsBuilder: (_, animation, __, child) {
+                return SlideTransition(
+                  position: Tween<Offset>(
+                    begin: const Offset(1, 0), // from right
+                    end: Offset.zero,
+                  ).animate(CurvedAnimation(
+                    parent: animation,
+                    curve: Curves.easeOut,
+                  )),
+                  child: child,
                 );
+              },
+            ),
+        );
 
             },
             
