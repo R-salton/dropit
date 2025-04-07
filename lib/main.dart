@@ -4,6 +4,8 @@ import 'package:dropit/message_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import 'register_page.dart';
+
 void main() {
   runApp(const MainApp());
 }
@@ -22,7 +24,7 @@ class MainApp extends StatelessWidget {
          splitScreenMode: true,
          builder: (context, child) => const Scaffold(
           body: Center(
-            child: ChatPage(),
+            child: RegisterPage(),
           ),
         
          ),)
