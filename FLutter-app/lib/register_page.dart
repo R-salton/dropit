@@ -12,10 +12,31 @@ class RegisterPage extends StatefulWidget {
   State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _RegisterPageState extends State<RegisterPage> {
+class _RegisterPageState extends State<RegisterPage> with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> _animation;
    final _usernameControl = TextEditingController();
     final _passwordControl = TextEditingController();
     final _emailControl = TextEditingController();
+
+
+
+@override
+  void initState() {
+    super.initState();
+    
+    _controller = AnimationController(
+      duration: const Duration(milliseconds: 500),
+      vsync: this,
+    );
+
+    _animation = CurvedAnimation(
+      parent: _controller,
+      curve: Curves.easeIn,
+    );
+
+    _controller.forward(); // Start animation
+  }
 
 void _onSubmitted() {
   String username = _usernameControl.text;
@@ -35,6 +56,7 @@ void _onSubmitted() {
     _usernameControl.dispose();
     _passwordControl.dispose();
     _emailControl.dispose();
+    _controller.dispose();
     super.dispose();
   }
 
@@ -139,25 +161,8 @@ Widget _buildLoginPrompt(){
             style: TextStyle(color: Colors.blue),
             recognizer: TapGestureRecognizer()..onTap = () {
               // Handle login action
-              Navigator.push(
-                  context,
-                  PageRouteBuilder(
-                    transitionDuration: Duration(milliseconds: 500),
-                    pageBuilder: (_, __, ___) => const LoginPage(),
-                    transitionsBuilder: (_, animation, __, child) {
-                      return SlideTransition(
-                        position: Tween<Offset>(
-                          begin: const Offset(-1, 0), // from right
-                          end: Offset.zero,
-                        ).animate(CurvedAnimation(
-                          parent: animation,
-                          curve: Curves.easeOut,
-                        )),
-                        child: child,
-                      );
-                    },
-                  ),
-                );
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginPage())
+              );
 
             },
             
@@ -167,5 +172,9 @@ Widget _buildLoginPrompt(){
     ),
   );
 }
+
+
+
+
 
 }

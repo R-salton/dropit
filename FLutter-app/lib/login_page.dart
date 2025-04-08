@@ -136,25 +136,7 @@ Widget _buildRegisterPrompt(){
             style: TextStyle(color: Colors.blue),
             recognizer: TapGestureRecognizer()..onTap = () {
               // Handle login action
-              Navigator.push(
-            context,
-            PageRouteBuilder(
-              transitionDuration: Duration(milliseconds: 500),
-              pageBuilder: (_, __, ___) => const RegisterPage(),
-              transitionsBuilder: (_, animation, __, child) {
-                return SlideTransition(
-                  position: Tween<Offset>(
-                    begin: const Offset(1, 0), // from right
-                    end: Offset.zero,
-                  ).animate(CurvedAnimation(
-                    parent: animation,
-                    curve: Curves.easeOut,
-                  )),
-                  child: child,
-                );
-              },
-            ),
-        );
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> RegisterPage()));
 
             },
             
