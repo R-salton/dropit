@@ -1,4 +1,5 @@
 import 'package:dropit/core/theme.dart';
+import 'package:dropit/register_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -22,7 +23,7 @@ class MainApp extends StatelessWidget {
          splitScreenMode: true,
          builder: (context, child) => const Scaffold(
           body: Center(
-            child: LoginPage(),
+            child: RegisterPage(),
           ),
         
          ),)

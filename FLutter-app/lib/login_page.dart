@@ -1,4 +1,7 @@
 import 'package:dropit/core/theme.dart';
+import 'package:dropit/features_auth/presentation/widgets/auth_button.dart';
+import 'package:dropit/features_auth/presentation/widgets/auth_input_field.dart';
+import 'package:dropit/features_auth/presentation/widgets/login_prompt.dart';
 import 'package:dropit/register_page.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -54,97 +57,17 @@ void _onSubmitted() {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-            _buildTexInput(context,"Email",Icons.email,_emailControl),
-            _buildTexInput(context,"Password",Icons.lock,_passwordControl,isPassowrd: true),
-            _buildLoginButton(context),
-           _buildRegisterPrompt()
+            AuthInputField(label: "Email",icon: Icons.email,controller: _emailControl, isPassowrd: false,),
+            AuthInputField(label: "Password",icon: Icons.lock,controller: _passwordControl, isPassowrd: true,),
+            AuthButton(label: "Login", onPressed: _onSubmitted),
+            LoginPrompt(title: "Don't have an account?", subtitle: "Click here to register", onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => RegisterPage()));
+            }),
           ],),
           )
         )
       ),
     );
   }
-
-
-// Register Button
-   Widget _buildLoginButton(BuildContext context){
-
-    return ElevatedButton(
-      onPressed: _onSubmitted,
-      style: ElevatedButton.styleFrom(
-        backgroundColor: DefaultColors.buttonColor,
-        padding: EdgeInsets.symmetric(vertical: 15),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(25),
-          
-        ),
-        
-      ),
-      
-      child: Text(
-        "Login",
-        style: TextStyle(
-          color: Colors.white,
-      ),
-    ),);
-  }
-
-
-
-// Text Input Field
-  Widget _buildTexInput(BuildContext context,String label,IconData icon,TextEditingController controller, {bool isPassowrd = false}){
-    return Container(
-
-      decoration: BoxDecoration(
-        color: DefaultColors.sentMessageInput,
-        borderRadius: BorderRadius.circular(25),
-      ),
-      padding: EdgeInsets.symmetric(horizontal: 20),
-      child: Row(children: [
-        Icon(icon, color: Colors.grey),
-        SizedBox(width: 10,),
-        Expanded(
-          child: TextField(
-            obscureText: isPassowrd,
-            controller: controller,
-            decoration: InputDecoration(
-              focusColor: Colors.transparent,
-              hintText: label,
-              hintStyle: TextStyle(color: Colors.grey),
-              border: InputBorder.none ,
-              focusedBorder: InputBorder.none,
-              enabledBorder: InputBorder.none,
-            ),
-          ),
-        ),
-      ],),
-    );
-  }
-
- 
-// Login Prompt
-Widget _buildRegisterPrompt(){
-
-  return Center(
-    child: RichText(
-      text: TextSpan(
-        text: "Don't have an account? ",
-        style: TextStyle(color: Colors.grey),
-        children: [
-          TextSpan(
-            text: "Click here to register",
-            style: TextStyle(color: Colors.blue),
-            recognizer: TapGestureRecognizer()..onTap = () {
-              // Handle login action
-              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> RegisterPage()));
-
-            },
-            
-          ),
-        ],
-      ),
-    ),
-  );
-}
 
 }
