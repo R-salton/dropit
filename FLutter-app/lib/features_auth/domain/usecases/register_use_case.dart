@@ -6,12 +6,12 @@ import 'package:dropit/features_auth/domain/repositories/auth_repository.dart';
 /// Use case for registering a user.
 class RegisterUseCase{
 
-  final AuthRepository _authRepository;
+  final AuthRepository authRepository;
 
-  RegisterUseCase(this._authRepository);
+  RegisterUseCase({required this.authRepository});
 
   Future<UserEntity> call(String email, String username, String password) async {
-    return await _authRepository.registerUSer(email, username, password);
+    return await authRepository.registerUSer(email, username, password);
   }
 
   

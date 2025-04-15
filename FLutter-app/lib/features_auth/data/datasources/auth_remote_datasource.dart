@@ -5,7 +5,8 @@ import 'package:dropit/features_auth/data/models/user_model.dart';
 import 'package:http/http.dart' as http;
 
 class AuthRemoteDataSource{
-final String baseUrl = "http://localhost:3000/auth";
+final  baseUrl = 'http://10.0.2.2:3000/auth';
+
 
 
 /// Returns a [UserModel] object if the login is successful.
@@ -23,9 +24,13 @@ Future<UserModel> login({required String email, required String password}) async
       'email': email,
       'password': password,
     } as String),
+    
   );
+
+  print(response.body);
     if (response.statusCode == 200) {
-      return UserModel.fromJson(json.decode(response.body));
+
+      return UserModel.fromJson(json.decode(response.body)["user"]);
     }
 
      
@@ -48,16 +53,16 @@ Future<UserModel> login({required String email, required String password}) async
         headers: {
           'Content-Type': 'application/json',
         },
-        body: jsonDecode({
+        body: jsonEncode({
           'email': email,
           'username': username,
           'password': password,
-        } as String),
+        } ),
       );
-      if (response.statusCode == 200) {
-        return UserModel.fromJson(json.decode(response.body));
-      }
-      throw Exception('Failed to register');
+      print(response.body);
+
+     
+        return UserModel.fromJson(jsonDecode(response.body)["user"]);
       
       
       

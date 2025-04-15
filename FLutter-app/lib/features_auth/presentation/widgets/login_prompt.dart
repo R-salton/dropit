@@ -28,6 +28,6 @@ class LoginPrompt extends StatelessWidget {
         ],
       ),
     ),
-  );;
+  );
   }
 }

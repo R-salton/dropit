@@ -1,9 +1,13 @@
 
+import 'package:dropit/features_auth/presentation/Bloc/auth_bloc/auth_bloc.dart';
+import 'package:dropit/features_auth/presentation/Bloc/auth_bloc/auth_event.dart';
+import 'package:dropit/features_auth/presentation/Bloc/auth_bloc/auth_state.dart';
 import 'package:dropit/features_auth/presentation/widgets/auth_button.dart';
 import 'package:dropit/features_auth/presentation/widgets/auth_input_field.dart';
 import 'package:dropit/features_auth/presentation/widgets/login_prompt.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'login_page.dart';
 
@@ -40,17 +44,15 @@ class _RegisterPageState extends State<RegisterPage> with SingleTickerProviderSt
     _controller.forward(); // Start animation
   }
 
-void _onSubmitted() {
-  String username = _usernameControl.text;
-  String email = _emailControl.text;
-  String password = _passwordControl.text;
-  // Perform registration logic here
-  print('Username: $username');
-  print('Email: $email');
-  print('Password: $password');
-  // Clear the text fields after submission
+void _onRegister() {
 
+ 
 
+  BlocProvider.of<AuthBloc>(context).add(
+    RegisterEvent(
+      username: _usernameControl.text,
+      email: _emailControl.text,
+      password: _passwordControl.text));
 }
 
 @override
@@ -83,7 +85,33 @@ void _onSubmitted() {
             AuthInputField(label: "Username",icon: Icons.person,controller: _usernameControl, isPassowrd: false,),
             AuthInputField(label: "Email",icon: Icons.email,controller: _emailControl, isPassowrd: false,),
             AuthInputField(label: "Password",icon: Icons.lock,controller: _passwordControl, isPassowrd: true,),
-            AuthButton(label: "Register", onPressed: _onSubmitted),
+           
+           BlocConsumer<AuthBloc,AuthState>(
+            builder: (context , state){
+              if( state is AuthLoadingState){
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              } 
+              return AuthButton(label: "Register", onPressed: _onRegister); 
+            },
+            listener: (context, state){
+              if(state is AuthSuccessState){
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  content: Text("${state.message} Please login to continue"),
+                  
+                ));
+                Navigator.pushNamed(context, "/login");
+              }
+              else if ( state is AuthFailureState){
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  content: Text("${state.error} Please try again"),
+                 
+                ));
+
+              }
+            }
+            ),
             LoginPrompt(title: "Have an account?", subtitle: "Click here to login", onPressed: () {
               Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));
             }),

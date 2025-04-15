@@ -2,11 +2,11 @@ import 'package:dropit/features_auth/domain/entities/user_entity.dart';
 import 'package:dropit/features_auth/domain/repositories/auth_repository.dart';
 
 class LoginUseCase{
-final AuthRepository _authRepository;
+final AuthRepository authRepository;
 
-LoginUseCase(this._authRepository);
+LoginUseCase({ required this.authRepository});
 
 Future<UserEntity> call(String email, String password) async {
-  return await _authRepository.loginUSer(email, password);
+  return await authRepository.loginUSer(email, password);
 }
 }

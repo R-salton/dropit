@@ -1,9 +1,9 @@
-import 'package:dropit/core/theme.dart';
+
 import 'package:dropit/features_auth/presentation/widgets/auth_button.dart';
 import 'package:dropit/features_auth/presentation/widgets/auth_input_field.dart';
 import 'package:dropit/features_auth/presentation/widgets/login_prompt.dart';
-import 'package:dropit/register_page.dart';
-import 'package:flutter/gestures.dart';
+import 'package:dropit/features_auth/presentation/pages/register_page.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
