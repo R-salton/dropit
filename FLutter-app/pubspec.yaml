@@ -17,6 +17,7 @@ dev_dependencies:
   flutter_lints: ^5.0.0
   google_fonts:
   cupertino_icons:
+  flutter_bloc:
 
 flutter:
   uses-material-design: true
