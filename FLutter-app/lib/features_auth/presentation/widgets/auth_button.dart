@@ -22,7 +22,7 @@ class AuthButton extends StatelessWidget {
       ),
       
       child: Text(
-        "Register",
+        label,
         style: TextStyle(
           color: Colors.white,
       ),

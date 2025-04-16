@@ -43,10 +43,11 @@ Future<void> _onLoginUser(LoginEvent event ,Emitter<AuthState> emit) async{
   
   try {
     emit(AuthLoadingState());
+    print(event.email + event.password);
 
-    final user = await loginUseCase.call(event.username, event.password);
+    final user = await loginUseCase.call(event.email, event.password);
 
-    await _storage.write(key: 'token', value: "user.token");  
+    await _storage.write(key: 'token', value: user.token);  
 
     emit(AuthSuccessState(message: "Successfully logged in"));
     

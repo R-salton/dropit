@@ -14,11 +14,11 @@ class LoginPrompt extends StatelessWidget {
    Center(
     child: RichText(
       text: TextSpan(
-        text: "Already have an account? ",
+        text: title,
         style: TextStyle(color: Colors.grey),
         children: [
           TextSpan(
-            text: "Click here to login",
+            text: subtitle,
             style: TextStyle(color: Colors.blue),
             recognizer: TapGestureRecognizer()
               ..onTap = onPressed,
